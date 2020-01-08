@@ -26,16 +26,7 @@
 
 ![Image](./admin.jpeg)
 
-2. 管理员发起Topic页面
-
-![Image](./createTopic.jpeg)
-显示信息介绍
-* Topic Topic详细描述信息
-* 开始时间 Topic开始的时间
-* 结束时间 Topic结束的时间
-* 投票用户 可以设置哪些地址可以投票，目前仅支持节点用户可投票
-
-3. 当前管理员创建的所有Topic展示页面
+2. 当前管理员创建的所有Topic展示页面
 
 ![Image](./admintopic.jpeg)
 
@@ -46,6 +37,16 @@
 * 赞成的票数，反对的票数
 * Topic状态 未开始，已取消，进行中，已结束，
 * 终止按钮，用于终止某个Topic
+
+
+3. 管理员发起Topic页面
+
+![Image](./createTopic.jpeg)
+显示信息介绍
+* Topic Topic详细描述信息
+* 开始时间 Topic开始的时间
+* 结束时间 Topic结束的时间
+* 投票用户 可以设置哪些地址可以投票，目前仅支持节点用户可投票
 
 ### 主页面设计
 ![Image](./topiclist.jpeg)
