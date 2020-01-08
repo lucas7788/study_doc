@@ -103,18 +103,19 @@ SuperAdmin设置哪些地址是Admin.
 ["dca1305cc8fc2b3d3127a2c4849b43301545d84e","df6fd120388b8bb62b4792a8fe76f8f8d69f4527"]
 ```
 
-4. def createTopic(admin, topic, startTime, endTime)
+4. def createTopic(admin, topic_title, topic_detail, startTime, endTime)
 Admin针对Ontology重大治理升级事件发起一个Topic，并设置该Topic投票开始时间和结束时间，到达开始时间自动开始投票，到达结束时间自动结束投票。
 参数介绍
 * admin Address, 第2个接口设置的管理员地址均可以调用该方法
-* topic String, 重大治理升级的详细描述信息，例如：'Update the Governance Strategy, Mortgage unlocking cycle changed from 2 months to 1 month, upgrade Time: 2020-01-03 11:02:18UST'
+* topic_title String, 重大治理升级的标题，例如：'Update the Governance Strategy, Mortgage unlocking cycle changed from 2 months to 1 month',
+* topic_detail String, 重大治理升级的详细描述信息，例如：'Update the Governance Strategy, Mortgage unlocking cycle changed from 2 months to 1 month, upgrade Time: 2020-01-03 11:02:18UST'
 * startTime u32, Unix时间戳,用来设定该Topic的投票开始时间
 * endTime u32, Unix时间戳,用来设定该Topic的投票结束时间
 
-该方法执行成功的时候会推送事件，其中包含该Topic的hash值，接下来的操作会用到该值。事件格式["createTopic", "hash", "topic"],
+该方法执行成功的时候会推送事件，其中包含该Topic的hash值，接下来的操作会用到该值。事件格式["createTopic", "hash", "topic_title", "topic_detail"],
 事件例子
 ```
-["637265617465546f706963","c5c03df1206eae087ae5613d296e2e1a9277a04cbb3a4f4e292e0ae821afda08","546f70696320496e666f"]
+["637265617465546f706963","f6e0a1e2ac41945a9aa7ff8a8aaa0cebc12a3bcc981a929ad5cf810a090e11ae","31","3131"]
 ```
 
 5. def setVoterForTopic(hash, voters)
@@ -136,9 +137,11 @@ Topic的发起人有权调用该方法设置哪些地址可以对该事件进行
 参数介绍
 * hash bytearray, Topic hash值
 
+返回值是[topic_title, topic_detail]
+
 返回值示例
 ```
-546f70696320496e666f
+["31","3131"]
 ```
 
 8. def getTopicInfo(hash)
@@ -148,7 +151,8 @@ Topic的发起人有权调用该方法设置哪些地址可以对该事件进行
 返回值介绍
 * [admin, topic, voter address,startTime, endTime, approve amount, reject amount, status]
    * admin Topic的创建者
-   * topic Topic具体内容
+   * topic_title Topic标题
+   * topic_detail Topic详细描述信息
    * voter address 所有的被授权投票的地址和权重的数组，例如：[['AbtTQJYKfQxq4UdygDsbLVjE8uRrJ2H3tP',100000],['Ac9JHT6gFh6zxpfv4Q7ZPLD4xLhzcpRTWt',100000]]
    * startTime 该Topic投票开始时间
    * endTime， 该Topic投票结束时间
@@ -158,7 +162,7 @@ Topic的发起人有权调用该方法设置哪些地址可以对该事件进行
 
 返回值示例
 ```
- ["dca1305cc8fc2b3d3127a2c4849b43301545d84e","546f70696320496e666f",[["dca1305cc8fc2b3d3127a2c4849b43301545d84e","e803000000000000"],["df6fd120388b8bb62b4792a8fe76f8f8d69f4527","1027000000000000"]],"07f7125e00000000","07285a5e00000000","00","00", "01"]
+ ["dca1305cc8fc2b3d3127a2c4849b43301545d84e","31","3131",[["dca1305cc8fc2b3d3127a2c4849b43301545d84e","e803000000000000"],["df6fd120388b8bb62b4792a8fe76f8f8d69f4527","e803000000000000"]],"01","01","00","00","01"]
 ```
 
 9. def getVoters(hash)
@@ -188,7 +192,7 @@ Event示例
 返回值，1表示赞成，2表示反对，其他值表示尚未投票
 
 12. getVotedAddress(hash)
-根据TopicHash查询已经投过该Topic的地址和投票内容。
+根据TopicHash查询已经投过该Topic的地址和投票内容, 1表示赞成，2表示反对，其他表示未投票。
 示例
 ```
 [["dca1305cc8fc2b3d3127a2c4849b43301545d84e","01"]]
