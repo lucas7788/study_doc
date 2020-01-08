@@ -42,6 +42,7 @@
 3. 管理员发起Topic页面
 
 ![Image](./createTopic.jpeg)
+
 显示信息介绍
 * Topic Topic详细描述信息
 * 开始时间 Topic开始的时间
