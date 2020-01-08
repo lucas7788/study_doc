@@ -195,3 +195,10 @@ Event示例
 13. cancelTopic(hash)
 
     根据Topic Hash 设置Topic状态为0，0表示Topic失效， 1表示Topic正常，状态为0的Topic，Owallet就不要显示了
+
+14. getTopicInfoListByAdmin(admin)
+根据admin查询该admin发起的所有Topic，返回值是TopicInfo的数组，TopicInfo各个字段的意思请看getTopicInfo中的介绍
+返回值示例
+```
+[["dca1305cc8fc2b3d3127a2c4849b43301545d84e","61",null,"01","02","00","00","01"],["dca1305cc8fc2b3d3127a2c4849b43301545d84e","6162",null,"01","02","00","00","01"]]
+```
