@@ -145,7 +145,7 @@ Topic的发起人有权调用该方法设置哪些地址可以对该事件进行
 ```
 
 8. def getTopicInfo(hash)
-根据Topic hash 查询TopicInfo, 包括[admin, topic, voter address,startTime, endTime, approve amount, reject amount]
+根据Topic hash 查询TopicInfo, 包括[admin, topic, voter address,startTime, endTime, approve amount, reject amount, state, topic hash]
 参数介绍
 * hash bytearray, Topic hash值
 返回值介绍
@@ -159,10 +159,11 @@ Topic的发起人有权调用该方法设置哪些地址可以对该事件进行
    * approve amount， 该Topic赞成者的总量，是赞成者权重的累加
    * reject amount， 该Topic反对者的总量，是反对者权重的累加
    * status， 该Topic的状态，0表示已取消，1表示正常
+   * topic hash
 
 返回值示例
 ```
- ["dca1305cc8fc2b3d3127a2c4849b43301545d84e","31","3131",[["dca1305cc8fc2b3d3127a2c4849b43301545d84e","e803000000000000"],["df6fd120388b8bb62b4792a8fe76f8f8d69f4527","e803000000000000"]],"01","01","00","00","01"]
+ ["dca1305cc8fc2b3d3127a2c4849b43301545d84e","31","3131",[["dca1305cc8fc2b3d3127a2c4849b43301545d84e","e803000000000000"],["df6fd120388b8bb62b4792a8fe76f8f8d69f4527","e803000000000000"]],"01","01","00","00","01", "c5c03df1206eae087ae5613d296e2e1a9277a04cbb3a4f4e292e0ae821afda08"]
 ```
 
 9. def getVoters(hash)
@@ -199,12 +200,11 @@ Event示例
 ```
 
 13. cancelTopic(hash)
-
-    根据Topic Hash 设置Topic状态为0，0表示Topic失效， 1表示Topic正常，状态为0的Topic，Owallet就不要显示了
+根据Topic Hash 设置Topic状态为0，0表示Topic失效， 1表示Topic正常，状态为0的Topic，Owallet就不要显示了
 
 14. getTopicInfoListByAdmin(admin)
 根据admin查询该admin发起的所有Topic，返回值是TopicInfo的数组，TopicInfo各个字段的意思请看getTopicInfo中的介绍
 返回值示例
 ```
-[["dca1305cc8fc2b3d3127a2c4849b43301545d84e","61",null,"01","02","00","00","01"],["dca1305cc8fc2b3d3127a2c4849b43301545d84e","6162",null,"01","02","00","00","01"]]
+[["dca1305cc8fc2b3d3127a2c4849b43301545d84e","61",null,"01","02","00","00","01","c5c03df1206eae087ae5613d296e2e1a9277a04cbb3a4f4e292e0ae821afda08" ],["dca1305cc8fc2b3d3127a2c4849b43301545d84e","6162",null,"01","02","00","00","01","c5c03df1206eae087ae5613d296e2e1a9277a04cbb3a4f4e292e0ae821afda08"]]
 ```
