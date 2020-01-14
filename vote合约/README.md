@@ -103,7 +103,7 @@ SuperAdmin设置哪些地址是Admin.
 ["dca1305cc8fc2b3d3127a2c4849b43301545d84e","df6fd120388b8bb62b4792a8fe76f8f8d69f4527"]
 ```
 
-4. def createTopic(admin, topic_title, topic_detail, startTime, endTime)
+4. def createTopic(admin, topic_title, topic_detail, startTime, endTime, voters)
 Admin针对Ontology重大治理升级事件发起一个Topic，并设置该Topic投票开始时间和结束时间，到达开始时间自动开始投票，到达结束时间自动结束投票。
 参数介绍
 * admin Address, 第2个接口设置的管理员地址均可以调用该方法
@@ -111,6 +111,7 @@ Admin针对Ontology重大治理升级事件发起一个Topic，并设置该Topic
 * topic_detail String, 重大治理升级的详细描述信息，例如：'Update the Governance Strategy, Mortgage unlocking cycle changed from 2 months to 1 month, upgrade Time: 2020-01-03 11:02:18UST'
 * startTime u32, Unix时间戳,用来设定该Topic的投票开始时间
 * endTime u32, Unix时间戳,用来设定该Topic的投票结束时间
+* voters 投票地址和权重的数组， 例如：[['AbtTQJYKfQxq4UdygDsbLVjE8uRrJ2H3tP',100000],['Ac9JHT6gFh6zxpfv4Q7ZPLD4xLhzcpRTWt',100000]]
 
 该方法执行成功的时候会推送事件，其中包含该Topic的hash值，接下来的操作会用到该值。事件格式["createTopic", "hash", "topic_title", "topic_detail"],
 事件例子
