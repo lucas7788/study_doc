@@ -68,7 +68,7 @@ let t = runtime::current_blockhash();
 ```
 7. current_txhash
 
-`current_txhash`获得当前区块的hash,示例
+`current_txhash`获得当前交易的hash,示例
 ```
 let t = runtime::current_txhash();
 ```
@@ -89,23 +89,10 @@ assert!(runtime::check_witness(from));
 
 10. notify
 
-`notify`函数将合约中事件推送到全网，并将其内容保存到链上,调用方法如下：
+`notify`函数将合约中事件推送到全网，并将其内容保存到链上,为了方便开发者调用notify, 我们在notify的基础上又封装一个对象`EventBuilder`，开发者可以通过`EventBuilder`提供的方法推送事件，调用方法如下：
 ```
-runtime::notify("notify".as_bytes())
-```
-在合约中推送事件的时候，可以自定义一个事件函数，加上`#[event]`注解即可，我们的工具库中提供了该属性宏，需要通过`use ostd::macros::event;`引入。
-示例如下:
-```
-use ostd::macros::event;
-mod notify {
-    use super::*;
-    #[event]
-    pub fn transfer(from: &Address, to: &Address, amount: U128) {}
-}
-fn transfer(from: &Address, to: &Address, amount: U128) -> bool {
-	...
-	notify::transfer(from, to, amount);
-}
+EventBuilder::new().bytearray(b"transfer").bytearray(from.as_ref()).bytearray(to.as_ref())
+            .bytearray(&amount.to_le_bytes()).notify();
 ```
 
 11. panic
